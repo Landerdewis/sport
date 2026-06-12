@@ -62,9 +62,25 @@ async function loadF1() {
 
     const data = await response.json();
 
-    document.getElementById("f1race").innerHTML =
+    const vandaag = new Date();
 
-      "Aantal races gevonden: " + data.length;
+const volgendeRace = data.find(race =>
+
+  new Date(race.date_start) > vandaag
+
+);
+
+if (volgendeRace) {
+
+  document.getElementById("f1race").innerHTML =
+
+    "<strong>Volgende race:</strong><br>" +
+
+    volgendeRace.meeting_name +
+
+    "<br><br><strong>Datum:</strong><br>" +
+
+    volgendeRace.date_start.substring(0,10);
 
   } catch (error) {
 
